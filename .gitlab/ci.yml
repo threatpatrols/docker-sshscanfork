@@ -33,12 +33,11 @@ build_tagged:
 
   script:
     - echo "${DOCKERHUB_PASSWORD}" | docker login --password-stdin -u "${DOCKERHUB_USERNAME}" "${DOCKERHUB_REGISTRY}"
-    - echo BUILD1_NAME=${BUILD1_NAME}
-    - echo BUILD_TAG=${BUILD_TAG}
-    - echo docker build --pull --tag "${BUILD1_NAME}:${BUILD_TAG}" --tag "${BUILD1_NAME}:latest" --build-arg COMMIT_REF=${COMMIT_REF} --build-arg COMMIT_HASH=${COMMIT_HASH} .
-#    - docker push "${BUILD1_NAME}:${BUILD_TAG}"
-#    - docker push "${BUILD1_NAME}:latest"
-#    - docker logout
+    - echo BUILD_TAG=${BUILD_TAG}  BUILD1_NAME=${BUILD1_NAME}  COMMIT_REF=${COMMIT_REF}  COMMIT_HASH=${COMMIT_HASH}  COMMIT_TAG=${CI_COMMIT_TAG}
+    - docker build --pull --tag "${BUILD1_NAME}:${BUILD_TAG}" --tag "${BUILD1_NAME}:latest" --build-arg COMMIT_REF=${COMMIT_REF} --build-arg COMMIT_HASH=${COMMIT_HASH} .
+    - docker push "${BUILD1_NAME}:${BUILD_TAG}"
+    - docker push "${BUILD1_NAME}:latest"
+    - docker logout
 
 # =============================================================================
 
