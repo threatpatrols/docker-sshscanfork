@@ -1,0 +1,48 @@
+
+image: docker:20.10.22
+
+include:
+  - template: Jobs/Container-Scanning.gitlab-ci.yml
+
+services:
+  - name: docker:20.10.22-dind
+    alias: docker
+
+variables:
+  GITLAB_RUNNER_TAG: "shared"
+
+stages:
+  - build
+  - scanning
+
+# =============================================================================
+
+build_tagged:
+  stage: build
+
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v?(\d+\.)?(\d+\.)?(\*|\d+)(\+.*?)?$/
+
+  tags:
+    - docker
+    - "${GITLAB_RUNNER_TAG}"
+
+  before_script:
+    - export BUILD_TAG="$(echo ${CI_COMMIT_TAG} | tr '+' '-')"
+    - export BUILD1_NAME="${DOCKERHUB_REGISTRY}/${DOCKERHUB_USERNAME}/${CI_PROJECT_NAME//threatpatrols-}"
+
+  script:
+    - echo "${DOCKERHUB_PASSWORD}" | docker login --password-stdin -u "${DOCKERHUB_USERNAME}" "${DOCKERHUB_REGISTRY}"
+    - docker build --pull --tag "${BUILD1_NAME}:${BUILD_TAG}" --tag "${BUILD1_NAME}:latest" --build-arg COMMIT_REF=${COMMIT_REF} --build-arg COMMIT_HASH=${COMMIT_HASH} .
+    - docker push "${BUILD1_NAME}:${BUILD_TAG}"
+    - docker push "${BUILD1_NAME}:latest"
+    - docker logout
+
+# =============================================================================
+
+container_scanning:
+  stage: scanning
+  tags:
+    - "${GITLAB_RUNNER_TAG}"
+  variables:
+    CS_IMAGE: $CI_REGISTRY_IMAGE:latest
