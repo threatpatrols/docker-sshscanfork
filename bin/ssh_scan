@@ -45,7 +45,7 @@ target_parser = SSHScan::TargetParser.new()
 
 opt_parser = OptionParser.new do |opts|
   opts.banner =
-    "ssh_scan v#{SSHScan::VERSION} (https://github.com/mozilla/ssh_scan)\n\n\
+    "ssh_scan v#{SSHScan::VERSION} (https://github.com/threatpatrols/sshscanfork)\n\n\
 Usage: ssh_scan [options]"
 
   opts.on("-t", "--target [IP/Range/Hostname]", Array,
