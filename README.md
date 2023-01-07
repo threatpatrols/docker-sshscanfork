@@ -1,59 +1,48 @@
-# ssh_scan
+# sshscanfork 
+A fork from [mozilla/ssh_scan](https://github.com/mozilla/ssh_scan) with updates because the
+original mozilla/ssh_scan project has been archived by Mozilla.
 
-[![Gem Version](https://badge.fury.io/rb/ssh_scan.svg)](https://badge.fury.io/rb/ssh_scan)
-[![Coverage Status](https://coveralls.io/repos/github/mozilla/ssh_scan/badge.svg?branch=master)](https://coveralls.io/github/mozilla/ssh_scan?branch=master)
+The original motivation for this fork was to update the dependencies that were causing package 
+and container scanning to trigger alerts.
 
-A SSH configuration and policy scanner
-
-⚠️ Deprecation Notice ⚠️
--------------------------
-
-Mozilla is no longer maintaining the SSH Scan project.
-
-Please fork it to continue development.
+Given the upstream (Mozilla) project was archived 2022-11-09 this fork exists without being 
+merged/pulled back into theirs.  To make it possible for others to use this new fork the 
+original references to `github.com/mozilla` have been adjusted to `github.com/threatpatrols`
 
 ## Key Benefits
-
 - **Minimal Dependencies** - Uses native Ruby and BinData to do its work, no heavy dependencies.
 - **Not Just a Script** - Implementation is portable for use in another project or for automation of tasks.
 - **Simple** - Just point `ssh_scan` at an SSH service and get a JSON report of what it supports and its policy status.
 - **Configurable** - Make your own custom policies that fit your unique policy requirements.
 
+## Versions
+* 0.1.44 - this fork-version bumps the version from the upstream `0.0.44` to `0.1.44` without 
+  any new ssh_scan functionality, the changes in this version are dependency and documentation updates.
+
 ## Setup
 
-To install and run as a gem, type:
-
+To run from Docker:
 ```bash
-gem install ssh_scan
-ssh_scan
+docker pull threatpatrols/sshscanfork
+docker run -it threatpatrols/sshscanfork --help
 ```
 
-To run from a docker container, type:
-
-```bash
-docker pull mozilla/ssh_scan
-docker run -it mozilla/ssh_scan -t sshscan.rubidus.com
-```
-
-To install and run from source, type:
-
+To install and run from source:
 ```bash
 # clone repo
-git clone https://github.com/mozilla/ssh_scan.git
-cd ssh_scan
+git clone https://github.com/threatpatrols/sshscanfork.git
+cd sshscanfork
 
 gem install bundler
 bundle install
 
-./bin/ssh_scan
+./bin/ssh_scan --help
 ```
 
-## Example Command-Line Usage
-
-Run `ssh_scan -h` to get this
+## Synopsis
 
 ```bash
-ssh_scan v0.0.21 (https://github.com/mozilla/ssh_scan)
+ssh_scan v0.1.44 (https://github.com/threatpatrols/sshscanfork)
 
 Usage: ssh_scan [options]
     -t, --target [IP/Range/Hostname] IP/Ranges/Hostname to scan
@@ -62,6 +51,7 @@ Usage: ssh_scan [options]
     -L, --logger [Log File Path]     Enable logger
     -O, --from_json [FilePath]       File to read JSON output from
     -o, --output [FilePath]          File to write JSON output to
+        --output-type [json, yaml]   Format to write stdout to json or yaml
     -p, --port [PORT]                Port (Default: 22)
     -P, --policy [FILE]              Custom policy file (Default: Mozilla Modern)
         --threads [NUMBER]           Number of worker threads (Default: 5)
@@ -88,27 +78,11 @@ Examples:
   ssh_scan -t 192.168.1.1 --unit-test -P custom_policy.yml
 ```
 
-- See here for [example output](https://github.com/mozilla/ssh_scan/blob/master/examples/192.168.1.1.json)
-- See here for [example policies](https://github.com/mozilla/ssh_scan/blob/master/config/policies)
-
-## ssh_scan as a service/api?
-
-This project is solely for ssh_scan engine/command-line usage.
-
-If you would like to run ssh_scan as a service, please refer to [the ssh_scan_api project](https://github.com/mozilla/ssh_scan_api)
-
-## Rubies Supported
-
-This project is integrated with [travis-ci](http://about.travis-ci.org/) and is regularly tested to work with multiple rubies.
-
-To checkout the current build status for these rubies, click [here](https://travis-ci.org/#!/mozilla/ssh_scan).
-
-## Contributing
-
-If you are interested in contributing to this project, please see [CONTRIBUTING.md](https://github.com/mozilla/ssh_scan/blob/master/CONTRIBUTING.md).
-
 ## Credits
 
-**Sources of Inspiration for ssh_scan**
+#### Original Mozilla Project and all the Original Contributors
+ - [github.com/mozilla/ssh_scan](https://github.com/mozilla/ssh_scan/graphs/contributors)
+ - [all 27x mozilla/ssh_scan contributors](https://github.com/mozilla/ssh_scan/graphs/contributors)
 
-- [**Mozilla OpenSSH Security Guide**](https://wiki.mozilla.org/Security/Guidelines/OpenSSH) - For providing a sane baseline policy recommendation for SSH configuration parameters (eg. Ciphers, MACs, and KexAlgos).
+#### Sources of Inspiration for ssh_scan
+ - [Mozilla OpenSSH Security Guide](https://wiki.mozilla.org/Security/Guidelines/OpenSSH) - For providing a sane baseline policy recommendation for SSH configuration parameters (eg. Ciphers, MACs, and KexAlgos).
