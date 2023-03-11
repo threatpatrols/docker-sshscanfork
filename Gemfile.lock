@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ssh_scan (0.1.45)
+    ssh_scan (0.1.46)
       bcrypt_pbkdf (>= 1.0.1)
       bindata (>= 2.4.3)
       ed25519 (>= 1.2.4)
