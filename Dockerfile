@@ -11,8 +11,11 @@ RUN set -x \
     && apk --update add openssh-client \
     && apk --update add --virtual build-dependencies build-base \
     && bundle install \
-    && apk del build-dependencies build-base \
-    && rm -rf /var/cache/apk/* \
+    && apk del build-dependencies build-base ruby-dev \
+    && rm -rf /var/cache/apk/*
+
+RUN set -x \
+    # && ruby /app/scripts/Ubuntu.rb \
     && /app/bin/ssh_scan --help
 
 ENTRYPOINT ["/app/bin/ssh_scan"]

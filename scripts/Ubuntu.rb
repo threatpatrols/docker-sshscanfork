@@ -41,7 +41,21 @@ codenames = {
   "15.04" => "vivid",
   "15.10" => "wily",
   "16.04" => "xenial",
-  "16.10" => "yakkety"
+  "16.10" => "yakkety",
+  "17.04" => "zesty",
+  "17.10" => "artful",
+  "18.04" => "bionic",
+  "18.10" => "cosmic",
+  "19.04" => "disco",
+  "19.10" => "eoan",
+  "20.04" => "focal",
+  "20.10" => "groovy",
+  "21.04" => "hirsute",
+  "21.10" => "impish",
+  "22.04" => "jammy",
+  "22.10" => "kinetic",
+  "23.04" => "lunar",
+  "23.10" => "mantic"
 }
 
 versions = {}
