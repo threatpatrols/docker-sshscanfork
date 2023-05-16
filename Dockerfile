@@ -1,4 +1,6 @@
-FROM ruby:3.0-alpine
+
+# https://hub.docker.com/_/ruby/tags
+FROM ruby:3.2-alpine
 
 WORKDIR /app
 ADD . /app
@@ -10,6 +12,7 @@ RUN set -x \
     && apk --update add --virtual build-dependencies build-base \
     && bundle install \
     && apk del build-dependencies build-base \
-    && rm -rf /var/cache/apk/*
+    && rm -rf /var/cache/apk/* \
+    && /app/bin/ssh_scan --help
 
 ENTRYPOINT ["/app/bin/ssh_scan"]
