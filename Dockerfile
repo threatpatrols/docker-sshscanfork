@@ -1,6 +1,6 @@
 
 # https://hub.docker.com/_/ruby/tags
-FROM ruby:3.2.2-alpine
+FROM ruby:3.3-alpine
 
 WORKDIR /app
 ADD . /app
