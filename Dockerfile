@@ -1,6 +1,10 @@
 
 # https://hub.docker.com/_/ruby/tags
-FROM ruby:3.2.3-alpine
+FROM ruby:3.2.4-alpine
+
+# Hello
+LABEL maintainer="Nicholas de Jong <ndejong@threatpatrols.com>"
+LABEL source="https://github.com/threatpatrols/docker-sshscanfork"
 
 WORKDIR /app
 ADD . /app
