@@ -1,6 +1,6 @@
 
 # https://hub.docker.com/_/ruby/tags
-FROM ruby:3.2.4-alpine
+FROM ruby:3.4.6-alpine
 
 # Hello
 LABEL maintainer="Nicholas de Jong <ndejong@threatpatrols.com>"
